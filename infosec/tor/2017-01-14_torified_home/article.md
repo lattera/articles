@@ -30,6 +30,7 @@ These are the things I used:
 1. An external drive to be formatted
 1. A MicroUSB cable to power the RPI3
 1. Two network cables
+1. Optional: Edimax N150 EW-7811Un Wireless USB
 1. Basic knowledge of vi
 
 As of the time of this writing, the HardenedBSD clang 4.0.0 image can
@@ -260,7 +261,48 @@ Perform one more reboot to make sure everything comes up nicely.
 We're now all done! You should now be fully, 100% set up as a Torified
 network. Happy onioning!
 
+Optional: Wireless Client
+-------------------------
+
+In case you can't plugin to an ethernet port (like, guest wifi at a
+coffee shop), you can use a USB wireless dongle. I recommend the
+Edimax N150 EW-7811Un adapter, since that's natively supported via the
+rtwn(4) driver in FreeBSD.
+
+If you're connecting to an open wireless network that does NOT have a
+captive portal, setting up wireless is rather easy:
+
+```
+# ifconfig wlan0 create wlandev rtwn0 ssid name_of_wireless_ssid up
+# dhclient wlan0
+```
+
+If you're connecting to a WPA-secured network that does NOT also have
+a captive portal, you'll need to edit your /etc/wpa_supplicant.conf
+file. Mine looks something like this:
+
+```
+network={
+	ssid="some ssid here"
+	psk="network wpa2 password here"
+}
+```
+
+Then, in /etc/rc.conf, I would have:
+
+```
+wlans_rtwn0="wlan0"
+ifconfig_wlan0="WPA DHCP"
+```
+
+It should come up at boot time.
+
+I've not yet tried connecting to a network with a captive portal. Once
+I encounter a captive portal setup, I'll update this article with
+instructions on how to login to it.
+
 TODO
 ----
 
-1. Add a USB Wireless NIC to the setup
+1. Logging into a captive portal
+1. Setting up a wireless AP
