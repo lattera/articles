@@ -269,6 +269,9 @@ coffee shop), you can use a USB wireless dongle. I recommend the
 Edimax N150 EW-7811Un adapter, since that's natively supported via the
 rtwn(4) driver in FreeBSD.
 
+You will need to edit your /etc/pf.conf file to set ```lan_if``` to
+"wlan0".
+
 If you're connecting to an open wireless network that does NOT have a
 captive portal, setting up wireless is rather easy:
 
@@ -294,8 +297,6 @@ Then, in /etc/rc.conf, I would have:
 wlans_rtwn0="wlan0"
 ifconfig_wlan0="WPA DHCP"
 ```
-
-It should come up at boot time.
 
 I've not yet tried connecting to a network with a captive portal. Once
 I encounter a captive portal setup, I'll update this article with
