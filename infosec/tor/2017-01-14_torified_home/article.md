@@ -302,8 +302,75 @@ I've not yet tried connecting to a network with a captive portal. Once
 I encounter a captive portal setup, I'll update this article with
 instructions on how to login to it.
 
+Optional: Wireless AP
+---------------------
+
+I'm going to go pretty quick with this section, since having read all
+of the above, you should be familiar with what's going on. On my RPI3,
+I now have two USB Wireless NICs: wlan0 and wlan1. wlan0 is to act as
+a wireless client and wlan1 as a wireless AP. 
+
+In my ```/etc/rc.conf``` file, I have:
+
+```
+wlans_rtwn1="wlan1"
+create_args_wlan1="wlanmode hostap"
+ifconfig_wlan1="inet 192.168.12.1 netmask 255.255.255.0 ssid tornet mode 11g"
+```
+
+In my ```/etc/pf.conf``` file, I have:
+
+```
+lan_if = "wlan0"
+tor_lan_if = "ue1"
+tor_wlan_if = "wlan1"
+
+non_tor = "{ 192.168.1.0/24 192.168.42.0/24 }"
+
+tor_net = "{ 192.168.11.0/24 192.168.12.0/24 }"
+
+trans_port = "9040"
+
+scrub in
+
+rdr pass on $tor_lan_if inet proto tcp to !($tor_lan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $tor_lan_if inet proto udp to port domain -> 127.0.0.1 port 1053
+
+rdr pass on $tor_wlan_if inet proto tcp to !($tor_wlan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $tor_wlan_if inet proto udp to port domain -> 127.0.0.1 port 1053
+
+block return in on $tor_lan_if inet proto tcp from $tor_net to any port domain
+block return in on $tor_wlan_if inet proto tcp from $tor_net to any port domain
+
+pass quick on { lo0 $lan_if } keep state
+pass out quick route-to $tor_lan_if inet proto udp to port 1053 keep state
+pass out quick route-to $tor_wlan_if inet proto udp to port 1053 keep state
+pass out quick inet to $non_tor keep state
+pass out route-to lo0 inet proto tcp all flags S/SA modulate state
+```
+
+In my ```/usr/local/etc/dhcpd.conf``` file, I have:
+
+```
+subnet 192.168.1.0 netmask 255.255.255.0 {
+}
+
+subnet 192.168.11.0 netmask 255.255.255.0 {
+        range 192.168.11.100 192.168.11.250;
+        option routers 192.168.11.1;
+        option domain-name-servers 192.168.11.1;
+        option domain-name "torified.dev";
+}
+
+subnet 192.168.12.0 netmask 255.255.255.0 {
+        range 192.168.12.100 192.168.12.250;
+        option routers 192.168.12.1;
+        option domain-name-servers 192.168.12.1;
+        option domain-name "torifiedwifi.dev";
+}
+```
+
 TODO
 ----
 
 1. Logging into a captive portal
-1. Setting up a wireless AP
