@@ -15,6 +15,28 @@ setting up in this article. Though this article focuses on using the
 HardenedBSD on the RPI3, the concepts apply equally to FreeBSD or
 HardenedBSD on any architecture.
 
+Important OPSEC Note
+--------------------
+
+Please note that this article is one of a technical nature. It will
+show you how to do things. However, this article does NOT teach proper
+OPSEC. Please keep that in mind if you experiment. 
+
+Remember to never divulge sensitive or personal information over Tor
+if you're using it purely for anonymity. This includes even storing
+personal or revealing information on devices connected to the
+Tor-ified network.
+
+In fact, thegrugq just wrote a great article titled "Twitter Activist
+Security":
+
+https://medium.com/@thegrugq/twitter-activist-security-7c806bae9cb0#.8uxhsymdl
+
+Please also see these two emails from the tor-relays mailing list:
+
+1. https://lists.torproject.org/pipermail/tor-relays/2014-October/005541.html
+1. https://lists.torproject.org/pipermail/tor-relays/2014-October/005544.html
+
 Requirements
 ------------
 
