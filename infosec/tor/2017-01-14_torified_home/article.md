@@ -27,10 +27,10 @@ if you're using it purely for anonymity. This includes even storing
 personal or revealing information on devices connected to the
 Tor-ified network.
 
-In fact, thegrugq just wrote a great article titled "Twitter Activist
-Security":
+Here's some great articles on OPSEC:
 
-https://medium.com/@thegrugq/twitter-activist-security-7c806bae9cb0#.8uxhsymdl
+* https://medium.com/@thegrugq/twitter-activist-security-7c806bae9cb0#.8uxhsymdl
+* http://www.slideshare.net/grugq/opsec-for-hackers
 
 Please also see these two emails from the tor-relays mailing list:
 
@@ -242,10 +242,13 @@ SOCKSPolicy accept 192.168.5.0/24
 SOCKSPolicy reject *
 Log notice file /var/log/tor-notices.log
 
+# NOTE: This section enables Tor relay mode. Remove if you just want
+# a torified network.
 ORPort 9001
 ExitPolicy reject *:*
 nickname tornop
 ContactInfo torified@example.com
+# End of relay section
 
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsOnResolve 1
