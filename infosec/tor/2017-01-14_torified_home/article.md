@@ -57,7 +57,7 @@ These are the things I used:
 
 As of the time of this writing, the HardenedBSD clang 4.0.0 image can
 be found here:
-https://hardenedbsd.org/~shawn/rpi3/clang400-2017-01-11/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-774b588d523.img.xz
+https://hardenedbsd.org/~shawn/rpi3/clang400-2017-02-03/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-02ac5aef1fc.img.xz
 
 Preparation
 -----------
