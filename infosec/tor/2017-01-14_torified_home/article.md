@@ -395,7 +395,69 @@ subnet 192.168.12.0 netmask 255.255.255.0 {
 }
 ```
 
-TODO
-----
+Connecting to a captive portal network
+--------------------------------------
 
-1. Logging into a captive portal
+Connecting to a network that uses a captive portal is tricky, since
+connecting to Tor will most likely be blocked until you authenticate
+with the captive portal.
+
+Additionally, since the RPI3 isn't running a GUI with a web browser,
+the RPI3 itself cannot perform the authentication step.
+
+**NOTE**: The following steps have the potential to leak info. Those
+who want to be extra careful likely will want to find another network
+not secured by a captive portal.
+
+In order to authenticate, you'll need to perform the following steps:
+
+1. Stop Tor on the RPI3
+1. Set up NAT on the RPI3
+1. Connect a device to the RPI3's network you set up above (wired or
+   wireless).
+1. Open a web browser, and browse to some internet-facing IP address
+   (I plugged in 8.8.8.8, Google's public DNS server).
+
+Stopping Tor is as easy as running the following command as root:
+
+```
+# service tor stop
+```
+
+Setting up NAT will require you to have a new pf configuration file,
+which I conveniently placed at ```/etc/pf.conf.nat```:
+
+```
+nat on wlan0 from any to any -> (wlan0)
+pass in all
+pass out all
+```
+
+In this case, wlan0 is the NIC connected to the captive portal
+network. You'll also need to set the ```net.inet.ip.forwarding```
+sysctl node to ```1``` and load the new pf ruleset:
+
+
+```
+# sysctl net.inet.ip.fowarding=1
+# pfctl -f /etc/pf.conf.nat
+```
+
+Once that's done, you can now use your device to browse to the
+internet-facing IP address. You should be redirected to the captive
+portal authentication page.
+
+Once authenticated, you can undo the pf ruleset change, the IP forward
+mode, and start Tor back up:
+
+```
+# pfctl -f /etc/pf.conf
+# sysctl net.inet.ip.fowarding=0
+# service tor start
+```
+
+You should now be good to go to start using your Tor-ified network.
+Again, performing these steps does have the possibility of leaking
+personally identifying information to either the public internet or
+the local network. Please keep that in mind prior to following these
+steps.
