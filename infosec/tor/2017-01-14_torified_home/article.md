@@ -57,7 +57,7 @@ These are the things I used:
 
 As of the time of this writing, the HardenedBSD clang 4.0.0 image can
 be found here:
-https://hardenedbsd.org/~shawn/rpi3/clang400-2017-02-03/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-02ac5aef1fc.img.xz
+https://hardenedbsd.org/~shawn/rpi3/clang400_2017-02-19/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-ddfbaab3f72.img.xz
 
 Preparation
 -----------
@@ -67,9 +67,9 @@ the SD card. Replace the $usb veriable with the path to the sdcard device entry.
 
 ```
 $ usb=/dev/da0
-$ fetch https://hardenedbsd.org/~shawn/rpi3/clang400-2017-02-03/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-02ac5aef1fc.img.xz
-$ unxz HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-02ac5aef1fc.img.xz
-$ sudo dd if=HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-02ac5aef1fc.img of=$usb bs=64k
+$ fetch https://hardenedbsd.org/~shawn/rpi3/clang400_2017-02-19/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-ddfbaab3f72.img.xz
+$ unxz HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-ddfbaab3f72.img.xz
+$ sudo dd if=HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-ddfbaab3f72.img of=$usb bs=64k
 ```
 
 Attach the serial console to your RPI3 and plug the USB side to your
