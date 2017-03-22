@@ -14,6 +14,9 @@ Attribution 4.0 International Public License.
 Articles
 ========
 
+Infosec - General
+* [The Importance of Exploit Mitigations](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/General/2017-03-21-importance/article.md)
+
 Infosec - ASLR
 --------------
 
