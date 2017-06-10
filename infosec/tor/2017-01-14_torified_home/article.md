@@ -48,16 +48,16 @@ These are the things I used:
 1. Insignia NS-CR2021 USB 2.0 SD/MMC Memory Card Reader
 1. 32GB SanDisk Ultra PLUS MicroSDHC
 1. A separate system, running FreeBSD or HardenedBSD
-1. HardenedBSD clang 4.0.0 image for the RPI3
+1. HardenedBSD image for the RPI3
 1. An external drive to be formatted
 1. A MicroUSB cable to power the RPI3
 1. Two network cables
 1. Optional: Edimax N150 EW-7811Un Wireless USB
 1. Basic knowledge of vi
 
-As of the time of this writing, the HardenedBSD clang 4.0.0 image can
+As of the time of this writing, the HardenedBSD images for the rpi3
 be found here:
-https://hardenedbsd.org/~shawn/rpi3/2017-03-13/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-80f0fcc53c2.img.xz
+https://hardenedbsd.org/~shawn/rpi3/
 
 Preparation
 -----------
@@ -67,9 +67,9 @@ the SD card. Replace the $usb veriable with the path to the sdcard device entry.
 
 ```
 $ usb=/dev/da0
-$ fetch https://hardenedbsd.org/~shawn/rpi3/2017-03-13/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-80f0fcc53c2.img.xz
-$ unxz HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-80f0fcc53c2.img.xz
-$ sudo dd if=HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-80f0fcc53c2.img of=$usb bs=64k
+$ fetch https://hardenedbsd.org/~shawn/rpi3/2017-05-23/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-5b2b82548001.img.xz
+$ unxz HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-5b2b82548001.img.xz
+$ sudo dd if=HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-5b2b82548001.img of=$usb bs=64k
 ```
 
 Attach the serial console to your RPI3 and plug the USB side to your
