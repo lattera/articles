@@ -31,6 +31,7 @@ Here's some great articles on OPSEC:
 
 * https://medium.com/@thegrugq/twitter-activist-security-7c806bae9cb0#.8uxhsymdl
 * http://www.slideshare.net/grugq/opsec-for-hackers
+* https://medium.com/@thegrugq/real-talk-on-reality-cf07cbb78530
 
 Please also see these two emails from the tor-relays mailing list:
 
