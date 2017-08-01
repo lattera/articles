@@ -66,6 +66,9 @@ Preparation
 First, download, uncompress, and flash the HardenedBSD RPI3 image to
 the SD card. Replace the $usb veriable with the path to the sdcard device entry.
 
+This bit assumes you're using a build from 2017-05-23. However, you'll
+probably want to use a newer build. Adjust the commands accordingly.
+
 ```
 $ usb=/dev/da0
 $ fetch https://hardenedbsd.org/~shawn/rpi3/2017-05-23/HardenedBSD-RaspberryPi3-aarch64-12.0-HARDENEDBSD-NODEBUG-5b2b82548001.img.xz
@@ -138,55 +141,27 @@ Edit /etc/make.conf to look like this:
 MAKE_JOBS_NUMBER=2
 ```
 
-Installing Ports
+Installing Packages
 ----------------
 
-Required ports:
+Previously, this section was about installing the following packages
+via the ports tree. Now that HardenedBSD maintains a signed package
+repo for 12-CURRENT/arm64, that is no longer needed. Using packages is
+now the preferred method for this article.
+
+Required packages:
 
 1. ports-mgmt/pkg
 1. security/tor
 1. net/isc-dhcp43-server
 
-I used iscsi for this, since powering the RPI3 over USB is kinda iffy.
-Powering both the RPI3 and a USB drive attached to it can cause
-issues. I'll leave figuring out iscsi to the reader, but this is how
-you would do it if you attached a USB drive.
-
-DO **NOT** try building ports directly on the SD card. You'll wear it
-out. Trust me; I've learned from experience on this one.
-
-First, we'll reformat and mount the drive to /usr/ports.
-
 ```
-# newfs /dev/da0
-# mkdir /usr/ports
-# mount /dev/da0 /usr/ports
+# pkg install -y tor isc-dhcp43-server
 ```
 
-Now download the HardenedBSD ports tree:
-
-```
-# cd $HOME
-# fetch --no-verify-peer https://github.com/HardenedBSD/hardenedbsd-ports/archive/master.tar.gz
-# tar -xf master.tar.gz -C /usr/ports --strip-components 1
-```
-
-Now compile and install the required ports. If a process segfaults,
-simply restart the build. FreeBSD's support for the RPI3 is still very
-much a work-in-progress and occasional random segfaults happen.
-
-```
-# cd /usr/ports/ports-mgmt/pkg
-# make install BATCH=1
-# cd /usr/ports/security/tor
-# make install BATCH=1
-# cd /usr/ports/net/isc-dhcp43-server
-# make install BATCH=1
-```
-
-This process may take a while. Due to the potential for random
-segfaults, the process needs to be babysat. But grab a drink, watch an
-episode or two of Mr Robot, make yourself comfortable.
+The first time you run ```pkg install```, it will install
+```ports-mgmt/pkg``` for you. Thus, you only need to install tor and
+isc-dhcp43-server.
 
 Configuring pf
 --------------
