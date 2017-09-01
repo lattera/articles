@@ -29,3 +29,4 @@ Infosec - Tor
 -------------
 
 * [Creating a Competely Tor-ified Home Network](https://github.com/lattera/articles/blob/master/infosec/tor/2017-01-14_torified_home/article.md)
+* [One Week With Tor](https://github.com/lattera/articles/blob/master/infosec/tor/2017-08-28_week_with_tor/article.md)
