@@ -98,3 +98,33 @@ place their CSS/JS assets behind CloudFlare without whitelisting Tor.
 
 I think I'll extend this experiment by one more week. Chances are,
 I'll keep extending indefinitely.
+
+Addendum 01 - Regarding Trust Issues
+------------------------------------
+
+A few people have asked me why I don't trust exit nodes with sensitive
+tasks like online banking. My distrust is mainly in the horrible state
+of SSL/TLS PKI. With hundreds of trusted roots, each with SSL/TLS
+certificate resellers, the amount of trust I must place in the least
+secure certificate vendor is huge. Any certificate vendor whose chain
+of trust resolves to a trusted root can issue certificates for any
+domain I visit. If a malicious exit node also has compromised or
+coerced a certificate vendor to produce (what we would consider, but
+our browser wouldn't) fraudulent certificate, I'm now in a pickle.
+
+Moxie's Convergence project would help resolve those issues. I loved
+his Defcon presentation, SSL and the Future of Authenticy. I really
+wish his Convergence project would've taken off. Instead, the industry
+has gone the other way with DNSSEC (which Tor's DNS proxying doesn't
+support).
+
+Because I cannot easily guarantee that my financial institution has a
+hardened SSL/TLS configuration with HSTS and PFS, I cannot guarantee
+the safety of sensitive traffic going through a Tor exit node. It's
+bad enough that I have to trust my ISP and all nodes in the route to
+my financial institution.
+
+If I had some sort of guarantee that SSL/TLS could 100% guarantee the
+authenticity and integrity of data transmitted over untrusted
+networks, I would definintely be okay with online banking over Tor.
+That's simply not the case.
