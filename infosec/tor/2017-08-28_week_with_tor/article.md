@@ -3,7 +3,7 @@ One Week With Tor
 
 Update 2017-12-16: After nearly four months behind Tor, I thought I
 would provide updates and insight. Take a look at Addendum 02. In
-Addendum 03, I aded the configuration files for my setup.
+Addendum 03, I added the configuration files for my setup.
 
 On 25 Aug 2017, I decided to spend one week completely over Tor. On
 one of my spare firewalls, I installed HardenedBSD 12-CURRENT/amd64
