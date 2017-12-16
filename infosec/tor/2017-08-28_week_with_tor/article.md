@@ -1,6 +1,10 @@
 One Week With Tor
 =================
 
+Update 2017-12-16: After nearly four months behind Tor, I thought I
+would provide updates and insight. Take a look at Addendum 02. In
+Addendum 03, I aded the configuration files for my setup.
+
 On 25 Aug 2017, I decided to spend one week completely over Tor. On
 one of my spare firewalls, I installed HardenedBSD 12-CURRENT/amd64
 and configured it to be a transparent Tor proxy. Being a transparent
@@ -128,3 +132,104 @@ If I had some sort of guarantee that SSL/TLS could 100% guarantee the
 authenticity and integrity of data transmitted over untrusted
 networks, I would definintely be okay with online banking over Tor.
 That's simply not the case.
+
+Addendum 02 - Four Months Later
+-------------------------------
+
+After four months behind Tor, I've decided to step up the game.
+Overall, my time behind Tor has been a mostly pleasant one with a few
+exceptions. I've now placed my phone and tablet behind Tor.
+
+OPNsense, an open source firewall that integrates a number of
+HardenedBSD's enhancements, now offers a Tor plugin. The Tor plugin
+can be configured to perform a number of tasks, such as setting up a
+non-exit relay and/or an exit relay, transparent proxy mode, normal
+SOCKS proxy mode, etc.
+
+Please note that if you decide to do the same thing as I'm doing, I'm
+not doing it for OPSEC. I'm doing it for research purposes. Simply
+being behind Tor does not make you anonymous. Tor by itself does not
+provide anonymity and confidentiality. Tor is simply one component in
+an OPSEC toolchain for anonymity and confidentiality.
+
+From a local network perspective, I've blocked a few egress ports that
+are known to use plaintext, like port 80. Thus, for web browsing, I'm
+going full-on HTTPS only. This will help prevent information leaks
+from my phone, though I still cannot guarantee that.
+
+I've noticed some sites, like Feedly, place everything, including
+APIs, behind Cloudflare in Captcha mode. I cannot access Feedly at all
+on my Android phone. I've now switched to The Old Reader. As a side
+note, [this](https://theoldreader.com/profile/lattera) is my profile
+on The Old Reader. Follow me, if you'd like.
+
+I'd like to take a moment to discourage the use of Cloudflare for
+providing Captchas, especially with APIs. Doing so prevents Tor users
+from being able to use your service. Back when Feedly launched, they
+offered a one-time $99 lifetime subscription option. I've paid Feedly
+for support, but they won't provide API access behind Tor. Since the
+API calls happen behind-the-scenes, I do not see the Captcha and
+cannot solve it in the Feedly Android application. My paid subscription
+is now rendered useless.
+
+Coinbase is in a worse situation. Coinbase outright blocks Tor. I'd
+have to disconnect from my Tor-ified wireless access point to access
+Coinbase.
+
+Now that Trump's FCC just repealed crucial Net Neutrality regulations,
+I suspect Tor will be ever more useful in the lives of average
+Americans. Mesh networking will become more widely adopted and I hope
+to one day start setting up a Tor-ified wireless network for the
+general public to use. Such a wireless network will be ever more
+crucial in times of civil unrest.
+
+Addendum 03 - Tor-ified Network Configuration Files
+---------------------------------------------------
+
+```
+# /etc/pf.conf
+set limit states 40000
+
+wan_if = "igb0"
+lan_if = "igb1"
+
+non_tor = "{ 192.168.1.0/24, 192.168.254.0/24 }"
+trans_port = "9040"
+
+scrub in
+
+no rdr on $lan_if inet proto tcp to port 23
+no rdr on $lan_if inet proto tcp to port 25
+no rdr on $lan_if inet proto tcp to port 53
+no rdr on $lan_if inet proto tcp to! 10.192.0.0/10 port 80
+no rdr on $lan_if inet proto tcp to port 88
+no rdr on $lan_if inet proto tcp to port 138
+no rdr on $lan_if inet proto tcp to port 139
+no rdr on $lan_if inet proto tcp to port 143
+no rdr on $lan_if inet proto tcp to port 213
+#no rdr on $lan_if inet proto tcp to port 5222
+#no rdr on $lan_if inet proto tcp to port 5228
+
+rdr pass on $lan_if inet proto tcp to !($lan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $lan_if inet proto udp to port domain -> 127.0.0.1 port 1053
+
+pass quick inet to $non_tor keep state
+block return quick proto tcp from $lan_if:network to ! 10.192.0.0/10
+
+pass quick on { lo0 $wan_if } keep state
+pass out quick route-to $lan_if inet proto udp to port 1053 keep state
+pass out route-to lo0 inet proto tcp all flags S/SA modulate state
+```
+
+```
+# torrc
+SOCKSPort 0
+SOCKSPolicy accept 192.168.254.0/24
+SOCKSPolicy reject *
+Log notice file /var/log/tor/net/notices.log
+
+VirtualAddrNetwork 10.192.0.0/10
+AutomapHostsOnResolve 1
+TransPort 9040
+DNSPort 1053
+```
