@@ -177,20 +177,38 @@ ue1 has a static IP of 192.168.5.1/24.
 Edit /etc/pf.conf to look like this:
 
 ```
-lan_if = "ue0"
-tor_if = "ue1"
+wan_if="ue0"
+lan_if="ue1"
 
-non_tor = "{ 192.168.1.0/24 }"
-
+non_tor = "{ 192.168.5.0/24 }"
 trans_port = "9040"
+dns_port = "1053"
 
 scrub in
 
-rdr pass on $tor_if inet proto tcp to !($tor_if) -> 127.0.0.1 port $trans_port
-rdr pass on $tor_if inet proto udp to port domain -> 127.0.0.1 port 1053
+# These "no rdr" rules are meant to block plaintext ports
+no rdr on { $lan_if } inet proto tcp to port 23
+no rdr on { $lan_if } inet proto tcp to port 25
+no rdr on { $lan_if } inet proto tcp to port 53
+no rdr on { $lan_if } inet proto tcp to ! 10.192.0.0/10 port 80
+no rdr on { $lan_if } inet proto tcp to port 88
+no rdr on { $lan_if } inet proto tcp to port 138
+no rdr on { $lan_if } inet proto tcp to port 139
+no rdr on { $lan_if } inet proto tcp to port 143
+no rdr on { $lan_if } inet proto tcp to port 213
 
-pass quick on { lo0 $lan_if } keep state
-pass out quick route-to $tor_if inet proto udp to port 1053 keep state
+rdr pass on $lan_if inet proto tcp to !($lan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $lan_if inet proto udp to port domain -> 127.0.0.1 port $dns_port
+
+# Allow local network traffic on LAN, but disallow everything else.
+# This blocks egress on the plaintext ports as described in the "no
+# rdr" rules above.
+pass quick proto tcp from $lan_if:network to $lan_if:network
+block return quick proto tcp from { $lan_if:network } to any
+
+pass quick on { lo0 $wan_if } keep state
+pass out quick route-to $lan_if inet proto udp to port $dns_port keep state
+pass out quick route-to $wlan_if inet proto udp to port $dns_port keep state
 pass out quick inet to $non_tor keep state
 pass out route-to lo0 inet proto tcp all flags S/SA modulate state
 ```
@@ -322,30 +340,38 @@ ifconfig_wlan1="inet 192.168.12.1 netmask 255.255.255.0 ssid tornet mode 11g"
 In my ```/etc/pf.conf``` file, I have:
 
 ```
-lan_if = "wlan0"
-tor_lan_if = "ue1"
-tor_wlan_if = "wlan1"
+wan_if="wlan0"
+lan_if="igb1"
+wlan_if="wlan1"
 
-non_tor = "{ 192.168.1.0/24 192.168.42.0/24 }"
-
-tor_net = "{ 192.168.11.0/24 192.168.12.0/24 }"
-
+non_tor = "{ 192.168.11.0/24, 192.168.12.0/24 }"
 trans_port = "9040"
+dns_port = "1053"
 
 scrub in
 
-rdr pass on $tor_lan_if inet proto tcp to !($tor_lan_if) -> 127.0.0.1 port $trans_port
-rdr pass on $tor_lan_if inet proto udp to port domain -> 127.0.0.1 port 1053
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 23
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 25
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 53
+no rdr on { $lan_if, $wlan_if } inet proto tcp to ! 10.192.0.0/10 port 80
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 88
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 138
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 139
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 143
+no rdr on { $lan_if, $wlan_if } inet proto tcp to port 213
 
-rdr pass on $tor_wlan_if inet proto tcp to !($tor_wlan_if) -> 127.0.0.1 port $trans_port
-rdr pass on $tor_wlan_if inet proto udp to port domain -> 127.0.0.1 port 1053
+rdr pass on $wlan_if inet proto tcp to !($wlan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $wlan_if inet proto udp to port domain -> 127.0.0.1 port $dns_port
 
-block return in on $tor_lan_if inet proto tcp from $tor_net to any port domain
-block return in on $tor_wlan_if inet proto tcp from $tor_net to any port domain
+rdr pass on $lan_if inet proto tcp to !($lan_if) -> 127.0.0.1 port $trans_port
+rdr pass on $lan_if inet proto udp to port domain -> 127.0.0.1 port $dns_port
 
-pass quick on { lo0 $lan_if } keep state
-pass out quick route-to $tor_lan_if inet proto udp to port 1053 keep state
-pass out quick route-to $tor_wlan_if inet proto udp to port 1053 keep state
+pass quick proto tcp from $lan_if:network to $lan_if:network
+block return quick proto tcp from { $lan_if:network, $wlan_if:network } to any
+
+pass quick on { lo0 $wan_if } keep state
+pass out quick route-to $lan_if inet proto udp to port $dns_port keep state
+pass out quick route-to $wlan_if inet proto udp to port $dns_port keep state
 pass out quick inet to $non_tor keep state
 pass out route-to lo0 inet proto tcp all flags S/SA modulate state
 ```
