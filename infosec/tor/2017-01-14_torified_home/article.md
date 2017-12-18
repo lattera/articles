@@ -208,7 +208,6 @@ block return quick proto tcp from { $lan_if:network } to any
 
 pass quick on { lo0 $wan_if } keep state
 pass out quick route-to $lan_if inet proto udp to port $dns_port keep state
-pass out quick route-to $wlan_if inet proto udp to port $dns_port keep state
 pass out quick inet to $non_tor keep state
 pass out route-to lo0 inet proto tcp all flags S/SA modulate state
 ```
