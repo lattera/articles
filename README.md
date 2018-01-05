@@ -14,16 +14,16 @@ Attribution 4.0 International Public License.
 Articles
 ========
 
-Infosec - General
------------------
-
-* [The Importance of Exploit Mitigations](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/General/2017-03-21-importance/article.md)
-
 Infosec - ASLR
 --------------
 
 * [Thoughts on the Branch Target Buffer (BTB) Paper](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/ASLR/2016-10-19_btb/article.md)
 * [Thoughts on the ASLR^Cache (AnC) Attack](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/ASLR/2017-02-15_anc/article.md)
+
+Infosec - General
+-----------------
+
+* [The Importance of Exploit Mitigations](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/General/2017-03-21-importance/article.md)
 
 Infosec - Tor
 -------------
