@@ -190,7 +190,27 @@ Human life would be extremely boring if we never interacted with other
 people. Use only the burner devices you've set up in the sections
 above. Use the alternate personas you've developed above.
 
-This section needs more info.
+Whenever possible, use end-to-end encrypted (e2e) communications
+services, like Signal or Wickr. You will want to establish a device
+rotation schedule and procedure, which includes notifying your
+contacts of a new ephemeral phone number. You will need to
+re-establish trust when you obtain a new device.
+
+If you're meeting someone you've neve met before, meet in a highly
+visible, public area. You need to establish trust. Do not talk about
+sensitive operations in public, however. Forget what you've seen on TV
+shows about operatives talking ops in a coffee shop. Never discuss
+sensitive details over links that can be recorded, even if using
+e2e applications. Assume the device you're using has already been
+compromised, even before you opened the packaging material. Use the
+burner device to discuss high-level details, such as meeting times and
+locations.
+
+When discussing sensitive details, keep electronics powered off, with
+the batteries fully removed, and preferrably in a different room.
+Ideally, the electronics would be powered off with the batteries
+pulled before going to the location where sensitive details can be
+discussed.
 
 Special Note on Phones
 ----------------------
@@ -259,3 +279,18 @@ privacy bit; it doesn't stop your number from being delivered, but
 will simply introduce a bit into the initial address message
 associated with your phone call telling the equipment not to give it
 to the subscriber.
+
+Additional Resources
+--------------------
+
+"From 1973 to 1984, [CounterSpy](https://altgov2.org/counterspy/)
+published detailed, damning information about US covert activities
+(and, to a lesser extent, those of other countries, including Israel,
+Australia, and South Africa). It was most infamous for naming CIA
+station chiefs. The CIA loathed it and, it's said, succeeded in
+undermining it."
+
+As of 24 Mar 2018, I've archived all publicly available issues of
+CounterSpy [here](https://github.com/lattera/CounterSpy). CounterSpy
+is a really good resource for learning both opsec failures and
+successes.
