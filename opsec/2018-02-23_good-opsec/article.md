@@ -72,7 +72,7 @@ VPN of choice. Never connect to the VPN prior to connecting to Tor.
 
 A simplified network diagram would look like:
 
-Laptop -> VPN -> Tor -> Internet
+Laptop -> Tor -> VPN -> Internet
 
 Connecting to the VPN first enables the VPN provider to know who you
 are. By connecting to Tor first (and using the Tor-ified network), you
