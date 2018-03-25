@@ -194,7 +194,10 @@ Whenever possible, use end-to-end encrypted (e2e) communications
 services, like Signal or Wickr. You will want to establish a device
 rotation schedule and procedure, which includes notifying your
 contacts of a new ephemeral phone number. You will need to
-re-establish trust when you obtain a new device.
+re-establish trust when you obtain a new device. Using the device
+behind a Tor-ified network is generally best. Once a device has been
+used behind the Tor-ified network, never use it on any non-Tor
+network.
 
 If you're meeting someone you've neve met before, meet in a highly
 visible, public area. You need to establish trust. Do not talk about
@@ -211,6 +214,10 @@ the batteries fully removed, and preferrably in a different room.
 Ideally, the electronics would be powered off with the batteries
 pulled before going to the location where sensitive details can be
 discussed.
+
+If you need to keep notes during meetings, do so with pencil and
+paper. Limit what you keep in electronic form. Use a notepad and
+ensure you do not write on any material that can leave impressions.
 
 Special Note on Phones
 ----------------------
