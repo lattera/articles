@@ -69,10 +69,9 @@ Use a fully Tor-ified network. I've written a
 [guide](https://github.com/lattera/articles/blob/master/infosec/tor/2017-01-14_torified_home/article.md)
 on how to do that. Once you've connected to Tor, then connect to your
 VPN of choice. Never connect to the VPN prior to connecting to Tor.
-
-A simplified network diagram would look like:
-
-Laptop -> VPN -> Tor -> Internet
+Since VPNs generally set your default route, do not connect to the VPN
+from the same device as the one connecting to Tor. Otherwise, Tor
+traffic would go over the VPN instead of the opposite (VPN over Tor).
 
 Connecting to the VPN first enables the VPN provider to know who you
 are. By connecting to Tor first (and using the Tor-ified network), you
@@ -99,7 +98,7 @@ for bluetooth, cameras, or microphones, use those.
 
 If possible, use operating systems that put security first. If you're
 a Linux user, I've heard good things about Alpine and Void Linux. If
-you're a BSD user, you can't go wrong with HardenedBSD or OpenBSD.
+you're a BSD user, HardenedBSD or OpenBSD would be good choices.
 
 If you go the "Tor-ify your network route," make sure NEVER to run Tor
 behind Tor. Do not run the Tor Browser in this case. Running Tor
