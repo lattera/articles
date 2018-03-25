@@ -35,3 +35,8 @@ Infosec - Vulnerabilities
 -------------------------
 
 * [About Meltdown and Spectre](https://github.com/lattera/articles/blob/master/infosec/Vulnerabilities/2018-01-05_Meltdown_Spectre/article.md)
+
+Operational Security
+--------------------
+
+* [A Beginner's Guide to OPSEC](https://github.com/lattera/articles/blob/master/opsec/2018-02-23_good-opsec/article.md)
