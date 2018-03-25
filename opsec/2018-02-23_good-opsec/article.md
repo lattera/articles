@@ -14,6 +14,10 @@ spot an issue or if there's something you'd like to add, please let me
 know. The goal for this article is be a rather lengthy one, inclusive
 of the needs of many different types of operations.
 
+If you would like to contribute to this article, please open a pull
+request on GitHub. I would love community contributions to this
+article.
+
 With that said, let's dig in!
 
 Physical location
