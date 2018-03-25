@@ -138,8 +138,9 @@ location that identifies you or where you purchased it.
 
 When registering your burner phone and SIM, do so at a different
 location. Again, use the travel instructions above after you've waited
-till the surveillance camera recordings have cycled. Do the initial
-setup, including setting up any accounts you may need (gmail, signal,
+till the surveillance camera recordings have cycled. For accounts that
+require using SMS to verify identity, do the initial setup for them,
+including setting up any accounts you may need (gmail, signal,
 facebook, twitter, etc.). Make sure to use the Tor-ified network setup
 linked to above during the setup process. Disable GPS, bluetooth, and
 anything else that generates RF comms and isn't needed for
