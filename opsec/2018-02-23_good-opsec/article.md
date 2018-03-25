@@ -312,3 +312,7 @@ As of 24 Mar 2018, I've archived all publicly available issues of
 CounterSpy [here](https://github.com/lattera/CounterSpy). CounterSpy
 is a really good resource for learning both opsec failures and
 successes.
+
+The Electronic Frontier Foundation (EFF) has a really good article on
+[attending protests](https://ssd.eff.org/en/module/attending-protests-united-states)
+in the United States.
