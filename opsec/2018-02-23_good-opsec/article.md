@@ -181,6 +181,13 @@ Establish a migration history that fits your target geographic area.
 Some people never leave the town they grew up in, some move around a
 little, others move around a lot.
 
+If you want help generating basic persona information, these sites
+could help:
+
+* [Employment Generator](https://www.fakepersongenerator.com/employment-generator)
+* [Data Fake Generator](http://www.datafakegenerator.com/generador.php)
+* [Fake Name Generator](https://www.fakenamegenerator.com)
+
 This section needs more info.
 
 Communicating With Others
