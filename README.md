@@ -40,3 +40,4 @@ Operational Security
 --------------------
 
 * [A Beginner's Guide to OPSEC](https://github.com/lattera/articles/blob/master/opsec/2018-02-23_good-opsec/article.md)
+* [Setting up an MTA Behind Tor](https://github.com/lattera/articles/blob/master/opsec/2018-05-08_torified_mta/article.md)
