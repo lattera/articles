@@ -319,3 +319,59 @@ Use your favorite MUA (mutt, neomutt, thunderbird, etc.) to connect to
 your MTA. Feel free to send me an email at
 shawn@3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
 and I'll do my best to respond when I can.
+
+Optional: Webmail Access
+------------------------
+
+Using webmail has its advantages and disadvantages. Webmail makes
+using your MTA really simple and can help with those times you don't
+have your normal MUA. However, it opens up a new attack vector. Keep
+in mind the risks and provide mitigations when you deem the risks as
+acceptable.
+
+We'll set up rainloop as our webmail of choice. It has a simple
+interface and doesn't require much. Install apache24, rainloop, and
+mod_apache24:
+
+```
+# pkg install apache24 rainloop mod_apache24
+# sysrc apache24_enable=YES
+```
+
+On around line 284 of `/usr/local/etc/apache24/httpd.onf`, you will
+find a line that looks similar to: `DirectoryIndex index.html`. Change
+that line to `DirectoryIndex index.php index.html`.
+
+I like to use virtual hosts so that it's easy to add new capabilities
+later on. Let's create the directory for our virtual host-specific
+configurations and add a new virtual host:
+
+```
+# mkdir -p /usr/local/etc/apache24/vhosts/active
+# cat <<EOF > /usr/local/etc/apache24/vhosts/active/3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
+<VirtualHost *:80>
+    ServerAdmin shawn@3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
+    DocumentRoot "/usr/local/www/rainloop"
+    ServerName 3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
+    ErrorLog "/var/log/apache/3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion/error_log"                                                                                      
+    CustomLog "/var/log/apache/3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion/access_log" common                                                                             
+
+        <Directory "/usr/local/www/rainloop">
+                AllowOverride All
+                Require all granted
+        </Directory>
+        <Directory />
+                AllowOverride All
+                Require all granted
+        </Directory>
+</VirtualHost>
+EOF
+# mkdir -p /var/log/apache/3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
+# chown www:www /var/log/apache/3w2s7tpb5mc7ubsjjnzp4oxvqupjeoywzwdxfvfnjn3toqbuzgkn7kqd.onion
+```
+
+Use a web browser to login to the webmail's admin interface by going
+to `http://domain.onion/?admin`. The default username and password is
+`admin` and `12345` respectively. Play around in the settings. You
+will need to configure the IMAP and SMTP settings at a minimum in the
+Domains tab.
