@@ -20,6 +20,11 @@ Infosec - ASLR
 * [Thoughts on the Branch Target Buffer (BTB) Paper](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/ASLR/2016-10-19_btb/article.md)
 * [Thoughts on the ASLR^Cache (AnC) Attack](https://github.com/lattera/articles/blob/master/infosec/Exploit%20Mitigations/ASLR/2017-02-15_anc/article.md)
 
+Infosec - Control Flow Integrity
+--------------------------------
+
+* [May 2018 Status Report: Cross-DSO CFI in HardenedBSD](https://github.com/lattera/articles/blob/master/hardenedbsd/2018-05-26_cross-dso-cfi/article.md)
+
 Infosec - General
 -----------------
 
