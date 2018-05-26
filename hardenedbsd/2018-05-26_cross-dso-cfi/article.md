@@ -116,19 +116,9 @@ I need to create a static library that includes only a single copy of
 the common sanitizer framework code. Applications compiled with CFI or
 SafeStack will then only have a single copy of the framework.
 
-libc is the most used library in base. The size of libc is relatively
-larger than other libraries and is turing-complete for attacker
-payloads. As it stands right now, libc is not compiled with LTO as it
-is a very complicated beast of a library. One could argue that
-Cross-DSO CFI isn't effective without libc support. Enabling LTO
-support for libc will take time. As the overused cliche goes: Rome
-wasn't built in a day.
-
-I have not tested Cross-DSO CFI, yet, and plan to very soon. llvm
-should automatically pick up that libc is not compiled with LTO and
-will not protect function calls to libc functions. Even as I write
-this article, I have a build running to test building with Cross-DSO
-CFI.
+I have not tested Cross-DSO CFI, yet, and plan to very soon. Even as I
+write this article, I have a build running to test building with
+Cross-DSO CFI. What has been tested so far is LTO + non-Cross-DSO CFI.
 
 Next I will need to integrate support in the RTLD for Cross-DSO CFI.
 Applications with the cfi-icall scheme enabled that call functions
