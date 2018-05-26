@@ -83,11 +83,6 @@ produced a fully functioning world! I have spent the last few months
 figuring out why enabling either non-Cross-DSO CFI or SafeStack caused
 issues. This brings us to today.
 
-I originally had LTO disabled in the CSU. This caused issues with
-registers not being properly used between the application and the C
-runtime. Enabling LTO for the CSU was one key ingredient to fixing the
-segfaults.
-
 The Sanitizers in FreeBSD
 -------------------------
 
