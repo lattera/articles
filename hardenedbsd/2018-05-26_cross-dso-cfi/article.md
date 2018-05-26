@@ -105,9 +105,7 @@ In my Cross-DSO CFI development VM, I now have SafeStack disabled
 across-the-board and am only compiling in CFI. As of 26 May 2018, an
 LTO-ified world (libs + apps) works in my limited testing. `/bin/ls`
 does not crash anymore! The second major milestone for Cross-DSO CFI
-has now been reached. Note that Cross-DSO CFI is not yet enabled in my
-VM, but I now have non-Cross-DSO CFI working with both libraries and
-apps compiled with LTO.
+has now been reached.
 
 Future Work
 -----------
@@ -115,10 +113,6 @@ Future Work
 I need to create a static library that includes only a single copy of
 the common sanitizer framework code. Applications compiled with CFI or
 SafeStack will then only have a single copy of the framework.
-
-I have not tested Cross-DSO CFI, yet, and plan to very soon. Even as I
-write this article, I have a build running to test building with
-Cross-DSO CFI. What has been tested so far is LTO + non-Cross-DSO CFI.
 
 Next I will need to integrate support in the RTLD for Cross-DSO CFI.
 Applications with the cfi-icall scheme enabled that call functions
