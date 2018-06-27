@@ -107,8 +107,57 @@ LTO-ified world (libs + apps) works in my limited testing. `/bin/ls`
 does not crash anymore! The second major milestone for Cross-DSO CFI
 has now been reached.
 
+Known Issues And Limitations
+----------------------------
+
+There are a few known issues and regressions. Note that this list of
+known issues essentially also constitutes a "work-in-progress" and
+every known issue will be fixed prior to the official launch of
+Cross-DSO CFI.
+
+It seems llvm does not like statically compiling applications with LTO
+that have a mixture of C and C++ code. /sbin/devd is one of these
+applications. As such, when Cross-DSO CFI is enabled, devd is compiled
+as a Position-Independent Executable (PIE). Doing this breaks UFS systems
+where /usr is on a separate partition. We are currently looking into
+solving this issue to allow devd to be statically compiled again.
+
+NO_SHARED is now unset in the tools build stage (aka, bootstrap-tools,
+cross-tools). This is related to the static compilation issue above.
+Unsetting NO_SHARED for to tools build stage is only a band-aid until
+we can resolve static compliation with LTO.
+
+One goal of our Cross-DSO CFI integration work is to be able to
+support the cfi-icall scheme when dlopen(3) and dlsym(3)/dlfunc(3) is
+used. This means the runtime linker (RTLD), must be enhanced to know
+and care about the CFI runtime. This enhancement is not currently
+implemented, but is planned.
+
+When Cross-DSO CFI is enabled, SafeStack is disabled. This is because
+compiling with Cross-DSO CFI brings in a second copy of the sanitizer
+runtime, violating the One Definition Rule (ODR). Resolving this issue
+should be straightforward: Unify the sanitizer runtime into a single
+common library that both Cross-DSO CFI and SafeStack can link against.
+
+When the installed world has Cross-DSO CFI enabled, performing a
+buildworld with Cross-DSO CFI disabled fails. This is somewhat related
+to the static compilation issue described above.
+
+Current Status
+--------------
+
+I've managed to get a Cross-DSO CFI world booting on bare metal (my
+development laptop) and in a VM. Some applications failed to work.
+Curiously, Firefox still worked (which also means xorg works).
+
+I'm now working through the known issues list, researching and
+learning.
+
 Future Work
 -----------
+
+Fixing pretty much everything in the "Known Issues And Limitations"
+section. ;P
 
 I need to create a static library that includes only a single copy of
 the common sanitizer framework code. Applications compiled with CFI or
@@ -134,6 +183,11 @@ little over a year now. A lot of progress is being made, yet there's
 still some major hurdles to overcome. This work has already helped
 improve llvm and I hope more commits upstream to both FreeBSD and llvm
 will happen.
+
+We're getting closer to being able to send out a preliminary Call For
+Testing (CFT). At the very least, I would like to solve the static
+linking issues prior to publishing the CFT. Expect it to be published
+before the end of 2018.
 
 I would like to thank Ed Maste, Dimitry Andric, and Rafael Espindola
 for their help, guidance, and support.
