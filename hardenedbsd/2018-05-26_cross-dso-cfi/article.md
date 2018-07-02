@@ -20,6 +20,11 @@ This article discusses where HardenedBSD stands with regards to
 Cross-DSO CFI in base. We have made a lot of progress, yet we're not
 even half-way there.
 
+Update on 02 Jul 2018: I
+[enabled](https://github.com/HardenedBSD/hardenedBSD/commit/8d0b496de1b252d40ba76f502c6a4040b250d6c6)
+non-Cross-DSO CFI for arm64 last night. As I work on Cross-DSO CFI
+support on amd64, I will also test on arm64.
+
 Brace yourself: This article is going to be full of references to
 "Cross-DSO CFI." Make a drinking game out of it. Or don't. It's your
 call. ;)
