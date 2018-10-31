@@ -106,7 +106,7 @@ ssh or jexec into the jail before running this:
     -m 16g \
     -t tap0 \
     -C /dev/nmdm-laptop-dev-03-A \
-    -d /dev/zvol/enctank/bhyve/laptop-dev-03/disk-01 \
+    -d /dev/zvol/tank/bhyve/laptop-dev-03/disk-01 \
     -E \
     -P 5901 \
     laptop-dev-03
