@@ -14,6 +14,11 @@ Attribution 4.0 International Public License.
 Articles
 ========
 
+FreeBSD
+-------
+
+* [Jailing The bhyve Hypervisor](https://github.com/lattera/articles/blob/master/freebsd/2018-10-27_jailed_bhyve/article.md)
+
 Infosec - ASLR
 --------------
 
