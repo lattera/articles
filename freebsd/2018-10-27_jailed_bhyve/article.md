@@ -125,8 +125,10 @@ HardenedBSD, bhyve is extremely hardened:
 1. Full RELRO (RELRO + BIND_NOW) is fully applied (HardenedBSD
    enhancement)
 1. SafeStack is applied to the application (HardenedBSD enhancement)
-1. Capsicum is fully applied (FreeBSD feature)
 1. Jailed (FreeBSD feature written by HardenedBSD)
+1. Virtual memory protected with guard pages (FreeBSD feature written
+   by HardenedBSD)
+1. Capsicum is fully applied (FreeBSD feature)
 
 Bad guys are going to have a hard time breaking out of the userland
 components of bhyve on HardenedBSD. :)
