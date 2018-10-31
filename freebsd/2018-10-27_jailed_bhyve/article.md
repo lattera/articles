@@ -34,6 +34,13 @@ That process is documented in the [FreeBSD
 Handbook](https://www.freebsd.org/handbook). For UEFI guests, you will
 need to install the `uefi-edk2-bhyve` package inside the jail.
 
+I network these jails with traditional jail networking. I have tested
+vnet jails with this setup, and that works fine, too. However, there
+is no real need to hook the jail up to any network so long as bhyve
+can access the tap device. In some cases, the VM might not need
+networking, in which case you can use a network-less VM in a
+network-less jail.
+
 We will use the following in our jail, so we will need to set up
 `devfs(8)` rules for them:
 
