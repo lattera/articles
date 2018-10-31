@@ -55,7 +55,7 @@ add path nmdm* unhide
 ```
 
 Notice that this ruleset is assigned index 25. That number is
-flexible. If you have another rulset with the same index, please
+flexible. If you have another ruleset with the same index, please
 choose a different index for this article. Keep in mind that you will
 need to adjust the use of the index later on in this article should
 you change it.
