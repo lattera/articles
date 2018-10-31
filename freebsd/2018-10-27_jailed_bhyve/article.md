@@ -111,3 +111,22 @@ ssh or jexec into the jail before running this:
     -P 5901 \
     laptop-dev-03
 ```
+
+Conclusion
+----------
+
+The bhyve hypervisor works great within a jail. When combined with
+HardenedBSD, bhyve is extremely hardened:
+
+1. PaX ASLR is fully applied due to compilation as a
+   Position-Independent Executable (HardenedBSD enhancement)
+1. PaX NOEXEC is fully applied (strict W^X) (HardenedBSD enhancement)
+1. Non-Cross-DSO CFI is fully applied (HardenedBSD enhancement)
+1. Full RELRO (RELRO + BIND_NOW) is fully applied (HardenedBSD
+   enhancement)
+1. SafeStack is applied to the application (HardenedBSD enhancement)
+1. Capsicum is fully applied (FreeBSD feature)
+1. Jailed (FreeBSD feature written by HardenedBSD)
+
+Bad guys are going to have a hard time breaking out of the userland
+components of bhyve on HardenedBSD. :)
