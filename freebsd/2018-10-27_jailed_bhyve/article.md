@@ -41,6 +41,10 @@ can access the tap device. In some cases, the VM might not need
 networking, in which case you can use a network-less VM in a
 network-less jail.
 
+By default, access to the kernel side of bhyve is disabled within
+jails. We need to set `allow.vmm` in our `jail.conf` entry for the
+bhyve jail.
+
 We will use the following in our jail, so we will need to set up
 `devfs(8)` rules for them:
 
@@ -82,6 +86,7 @@ host.hostname = "$name";
 bhyve-01 {
     devfs_ruleset = 25;
     ip4.addr = 192.168.1.2;
+    allow.vmm;
     persist;
 }
 ```
