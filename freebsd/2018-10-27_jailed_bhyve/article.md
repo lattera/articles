@@ -10,6 +10,10 @@ article. There is no functional difference in bhyve on HardenedBSD
 versus bhyve on FreeBSD. The only difference between HardenedBSD and
 FreeBSD is the aditional security offered by HardenedBSD.
 
+The steps I outline here work for both FreeBSD and HardenedBSD. These
+are the bare minimum steps, no extra work needed for either FreeBSD or
+HardenedBSD.
+
 A Gentle History Lesson
 --------------
 
