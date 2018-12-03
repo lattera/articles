@@ -85,7 +85,7 @@ XMPP at lattera@is.a.hacker.sx. I have OTR configured for it. My OTR
 fingerprint is:
 
 ```
-030FEA2D E1DD3FA0 891AEF03 8AABE7BD 39BC16EF
+FBAC6294 363C1145 2D548CD3 4C52BE83 52015767
 ```
 
 Conclusion
