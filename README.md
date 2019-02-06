@@ -19,6 +19,11 @@ FreeBSD
 
 * [Jailing The bhyve Hypervisor](https://github.com/lattera/articles/blob/master/freebsd/2018-10-27_jailed_bhyve/article.md)
 
+Hardware
+--------
+
+* [Flashing the BIOS on the PC Engines APU4c4](https://github.com/lattera/articles/blob/master/hardware/apu/2019-02-05_flashing_bios/article.md)
+
 Infosec - ASLR
 --------------
 
