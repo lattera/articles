@@ -7,6 +7,9 @@ constrained 64-bit environments and firewalls.
 Their USB and mSATA ports have a few quirks, and I bumped up against a
 major quirk that required flashing a different BIOS as a workaround.
 This article details the hacky way in which I went about doing that.
+The reason for this hacky way is because the upgrade of OPNsense from
+18.7.10 to 19.1 failed partway through, leaving me with an unbootable
+system.
 
 What prompted this article is that something in either the CAM or GEOM
 layer in FreeBSD 11.2 caused the mSATA to hang, preventing file
@@ -37,6 +40,13 @@ the disk.
 
 This post also assumes you know your way around a BSD system. You'll
 need to modify some commands to accomodate your setup.
+
+At the time of this writing (11 Feb 2019), the BIOS releases can be
+found on the [PC Engines GitHub page](https://pcengines.github.io/).
+
+**Update 11 Feb 2019**: Multiple people are reporting success running
+firmware v4.9.0.1. So, if you don't want to run the legacy build, you
+might give v4.9.0.1 a try.
 
 ## Well, get on with it already!
 
@@ -117,9 +127,6 @@ flash it.
 right BIOS for your system! Do NOT blame me if you simply copy these
 next commands verbatim without first ensuring they apply to your
 system.
-
-At the time of this writing (05 Feb 2019), the BIOS releases can be
-found [here](https://pcengines.github.io/).
 
 ```
 # chroot /mnt/root
