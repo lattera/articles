@@ -61,3 +61,4 @@ Personal Articles
 -----------------
 
 * [Interview about contributing to FOSS](https://github.com/lattera/articles/blob/master/personal/2019-04-05-interview/article.md)
+* [An Adventure Thirty Years In The Making](https://github.com/lattera/articles/blob/master/personal/2019-06-18_dog_adventure/article.md)
