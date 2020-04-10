@@ -1,5 +1,4 @@
-Creating a Completely Tor-ified Home Network
-============================================
+# Creating a Completely Tor-ified Home Network
 
 One thing I've always wanted to do is support Tor by running a public
 relay. However, I didn't have a machine to dedicate to it. All of my
@@ -15,8 +14,7 @@ setting up in this article. Though this article focuses on using the
 HardenedBSD on the RPI3, the concepts apply equally to FreeBSD or
 HardenedBSD on any architecture.
 
-Important OPSEC Note
---------------------
+## Important OPSEC Note
 
 Please note that this article is one of a technical nature. It will
 show you how to do things. However, this article does NOT teach proper
@@ -38,8 +36,7 @@ Please also see these two emails from the tor-relays mailing list:
 1. https://lists.torproject.org/pipermail/tor-relays/2014-October/005541.html
 1. https://lists.torproject.org/pipermail/tor-relays/2014-October/005544.html
 
-Requirements
-------------
+## Requirements
 
 These are the things I used:
 
@@ -60,8 +57,7 @@ As of the time of this writing, the HardenedBSD images for the rpi3
 be found here:
 https://hardenedbsd.org/~shawn/rpi3/
 
-Preparation
------------
+## Preparation
 
 First, download, uncompress, and flash the HardenedBSD RPI3 image to
 the SD card. Replace the $usb veriable with the path to the sdcard device entry.
@@ -87,8 +83,7 @@ Plug in the MicroUSB cable to the RPI3 and watch it boot up to the
 login screen. By default, there's a non-root account with the
 username/password of hbsd/hbsd. The root account has no password.
 
-Initial Setup
--------------
+## Initial Setup
 
 Now that we have HardenedBSD flashed, we'll want to do the initial
 setup tasks.
@@ -96,7 +91,7 @@ setup tasks.
 Grow the root filesystem to fill the full SD card:
 
 ```
-# service growfs onestart
+$ sudo service growfs onestart
 ```
 
 Edit /boot/loader.conf to look like this:
@@ -141,8 +136,7 @@ Edit /etc/make.conf to look like this:
 MAKE_JOBS_NUMBER=2
 ```
 
-Installing Packages
-----------------
+## Installing Packages
 
 Previously, this section was about installing the following packages
 via the ports tree. Now that HardenedBSD maintains a signed package
@@ -156,15 +150,14 @@ Required packages:
 1. net/isc-dhcp43-server
 
 ```
-# pkg install -y tor isc-dhcp43-server
+$ sudo pkg install -y tor isc-dhcp43-server
 ```
 
 The first time you run ```pkg install```, it will install
 ```ports-mgmt/pkg``` for you. Thus, you only need to install tor and
 isc-dhcp43-server.
 
-Configuring pf
---------------
+## Configuring pf
 
 Tor has native support for pf, so that's what we'll use for the
 transparent proxy part.
@@ -186,11 +179,9 @@ dns_port = "1053"
 
 scrub in
 
-# These "no rdr" rules are meant to block plaintext ports
 no rdr on { $lan_if } inet proto tcp to port 23
 no rdr on { $lan_if } inet proto tcp to port 25
 no rdr on { $lan_if } inet proto tcp to port 53
-no rdr on { $lan_if } inet proto tcp to ! 10.192.0.0/10 port 80
 no rdr on { $lan_if } inet proto tcp to port 88
 no rdr on { $lan_if } inet proto tcp to port 138
 no rdr on { $lan_if } inet proto tcp to port 139
@@ -200,9 +191,6 @@ no rdr on { $lan_if } inet proto tcp to port 213
 rdr pass on $lan_if inet proto tcp to !($lan_if) -> 127.0.0.1 port $trans_port
 rdr pass on $lan_if inet proto udp to port domain -> 127.0.0.1 port $dns_port
 
-# Allow local network traffic on LAN, but disallow everything else.
-# This blocks egress on the plaintext ports as described in the "no
-# rdr" rules above.
 pass quick proto tcp from $lan_if:network to $lan_if:network
 block return quick proto tcp from { $lan_if:network } to any
 
@@ -221,8 +209,7 @@ own pf _tor:_tor
 At this point, I would actually reboot. That way, pf gets loaded at
 boot and devfs picks up the new ownership of /dev/pf.
 
-Configuring tor
----------------
+## Configuring tor
 
 This is what my /usr/local/etc/tor/torrc file looks like. I also have
 a local SOCKS proxy enabled so I can still connect to Tor simply using
@@ -235,14 +222,6 @@ SOCKSPolicy accept 192.168.5.0/24
 SOCKSPolicy reject *
 Log notice file /var/log/tor-notices.log
 
-# NOTE: This section enables Tor relay mode. Remove if you just want
-# a torified network.
-ORPort 9001
-ExitPolicy reject *:*
-nickname tornop
-ContactInfo torified@example.com
-# End of relay section
-
 VirtualAddrNetwork 10.192.0.0/10
 AutomapHostsOnResolve 1
 TransPort 9040
@@ -252,8 +231,7 @@ DNSPort 1053
 Tor is now fully set up to be both a public relay and a transparent
 proxy for the network!
 
-Configuring dhcpd
------------------
+## Configuring dhcpd
 
 This part is optional. If you don't want to offer DHCP on your
 Torified network, skip this section. You'll simply need to use static
@@ -279,8 +257,7 @@ Perform one more reboot to make sure everything comes up nicely.
 We're now all done! You should now be fully, 100% set up as a Torified
 network. Happy onioning!
 
-Optional: Wireless Client
--------------------------
+## Optional: Wireless Client
 
 In case you can't plugin to an ethernet port (like, guest wifi at a
 coffee shop), you can use a USB wireless dongle. I recommend the
@@ -294,8 +271,8 @@ If you're connecting to an open wireless network that does NOT have a
 captive portal, setting up wireless is rather easy:
 
 ```
-# ifconfig wlan0 create wlandev rtwn0 ssid name_of_wireless_ssid up
-# dhclient wlan0
+$ sudo ifconfig wlan0 create wlandev rtwn0 ssid name_of_wireless_ssid up
+$ sudo dhclient wlan0
 ```
 
 If you're connecting to a WPA-secured network that does NOT also have
@@ -320,8 +297,7 @@ I've not yet tried connecting to a network with a captive portal. Once
 I encounter a captive portal setup, I'll update this article with
 instructions on how to login to it.
 
-Optional: Wireless AP
----------------------
+## Optional: Wireless AP
 
 I'm going to go pretty quick with this section, since having read all
 of the above, you should be familiar with what's going on. On my RPI3,
@@ -352,7 +328,6 @@ scrub in
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 23
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 25
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 53
-no rdr on { $lan_if, $wlan_if } inet proto tcp to ! 10.192.0.0/10 port 80
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 88
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 138
 no rdr on { $lan_if, $wlan_if } inet proto tcp to port 139
@@ -396,8 +371,7 @@ subnet 192.168.12.0 netmask 255.255.255.0 {
 }
 ```
 
-Connecting to a captive portal network
---------------------------------------
+## Connecting to a captive portal network
 
 Connecting to a network that uses a captive portal is tricky, since
 connecting to Tor will most likely be blocked until you authenticate
@@ -422,7 +396,7 @@ In order to authenticate, you'll need to perform the following steps:
 Stopping Tor is as easy as running the following command as root:
 
 ```
-# service tor stop
+$ sudo service tor stop
 ```
 
 Setting up NAT will require you to have a new pf configuration file,
@@ -440,8 +414,8 @@ sysctl node to ```1``` and load the new pf ruleset:
 
 
 ```
-# sysctl net.inet.ip.fowarding=1
-# pfctl -f /etc/pf.conf.nat
+$ sudo sysctl net.inet.ip.fowarding=1
+$ sudo pfctl -f /etc/pf.conf.nat
 ```
 
 Once that's done, you can now use your device to browse to the
@@ -452,9 +426,9 @@ Once authenticated, you can undo the pf ruleset change, the IP forward
 mode, and start Tor back up:
 
 ```
-# pfctl -f /etc/pf.conf
-# sysctl net.inet.ip.fowarding=0
-# service tor start
+$ sudo pfctl -f /etc/pf.conf
+$ sudo sysctl net.inet.ip.fowarding=0
+$ sudo service tor start
 ```
 
 You should now be good to go to start using your Tor-ified network.
