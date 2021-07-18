@@ -13,6 +13,12 @@ code).
 
 I'm getting long-winded, so on to the details.
 
+This project is developed on HardenedBSD and designed for HardenedBSD,
+but it should work on other POSIX OSes. The build scripts are simply
+BSD Makefiles. Since I haven't done any Linux development in multiple
+decades, I don't need to support non-BSD build frameworks, like
+autotools.
+
 Though the first set of APIs has been written, I would consider
 neither the ABIs nor the APIs stable, yet. I plan to `git tag`
 specific versions, and at that point, the ABIs and APIs should be
