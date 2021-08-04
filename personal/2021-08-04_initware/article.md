@@ -1,7 +1,7 @@
 # My Thoughts on InitWare
 
 [InitWare](https://github.com/InitWare/InitWare) is a minimal port of
-certain SystemD componenets, with a goal to run on the BSDs. Being a
+certain SystemD components, with a goal to run on the BSDs. Being a
 port, it uses the GPL. This article details my thoughts about the
 project and about its licensing, and what I see may be in the future
 for this type of work.
