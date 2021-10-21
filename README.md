@@ -63,3 +63,4 @@ Personal Articles
 * [Interview about contributing to FOSS](https://git.hardenedbsd.org/shawn.webb/articles/-/blob/master/personal/2019-04-05-interview/article.md)
 * [An Adventure Thirty Years In The Making](https://git.hardenedbsd.org/shawn.webb/articles/-/blob/master/personal/2019-06-18_dog_adventure/article.md)
 * [My Thoughts on InitWare, a Minimal SystemD Port for the BSDs](https://git.hardenedbsd.org/shawn.webb/articles/-/blob/master/personal/2021-08-04_initware/article.md)
+* [October 2021 Home Infrastructure Status](https://git.hardenedbsd.org/shawn.webb/articles/-/blob/master/personal/2021-10-20_home_infra/article.md)
