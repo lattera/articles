@@ -119,7 +119,9 @@ inspecting the log files with care. If any system was compromised, an
 attacker could theoretically pivot to other systems via carefully
 crafted malicious syslog messages. Would anyone do this? I doubt it.
 But it's still within my own threat model. At this moment, I'd like to
-thank the sarcasm gods for terminal escape codes.
+thank the sarcasm gods for terminal escape codes. I mainly mention
+this to demonstrate how I approach data I don't fully trust--I
+naturally distrust even the data I generate.
 
 Every system in my infrastructure that can log to syslog have their
 syslog messages forwarded to this syslog server. As a rule: if the
