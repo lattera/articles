@@ -1,13 +1,15 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 20 Oct 2021, 22:00 EDT
+Last modified: 21 Oct 2021, 10:00 EDT
 
 Please note that this is a living document. I plan to evolve this
-article in step with the infrastructure.
+article in step with the infrastructure. If you're interested in
+following the evolution of this document, please look at the git
+commit history.
 
 My infrastructure at home is slowly growing. Now that I'm working from
-99% of the time, I want to make sure that my home network is as locked
-down as I can get it.
+home 99% of the time, I want to make sure that my home network is as
+locked down as I can get it.
 
 I also use my home network as a playground for both HardenedBSD's and
 my work's production networks.
@@ -33,7 +35,7 @@ I have a CAT6 cable running between the floors. I have a TP-LINK L3
 managed switch on the main floor, and a Cisco SG350 in the basement.
 The CAT6 cable connects both switches. I regret buying the TP-LINK
 switch as it doesn't support nearly the same features as I have on the
-SG350.
+SG350 (for example: remote syslog support).
 
 Where possible, all systems are connected via ethernet. I try to keep
 the number of active wireless devices to an absolute minimum.
@@ -41,18 +43,19 @@ the number of active wireless devices to an absolute minimum.
 ## Core Infrastructure
 
 I'm eating my own dogfood by running the proprietary fork of OPNsense
-(called HawkSense) I'm working on at my ${DAYJOB} as my perimeter
-firewall. I use Hurricane Electric's TunnelBroker service for IPv6.
+(called [HawkSense](https://blackhawknest.com/features/)) I'm working
+on at my ${DAYJOB} as my perimeter firewall. I use Hurricane
+Electric's [TunnelBroker](https://tunnelbroker.net/) service for IPv6.
 Even if Verizon FiOS residential service supported IPv6 (their
 business service does), I'd still want to use TunnelBroker so that I
 can maintain my own static /48.
 
-As far as hardware is concerned, the perimeter firewall is a Protectli
-FW6C with 32GB RAM, a 128GB system drive and a 1TB data drive. It's a
-full ZFS install, so no UFS.
+As far as hardware is concerned, the perimeter firewall is a
+[Protectli](https://protectli.com/) FW6C with 32GB RAM, a 128GB
+system drive and a 1TB data drive. It's a full ZFS install, so no UFS.
 
-For wireless, I use HardenedBSD 13-STABLE on a PC Engines APU2 using
-the WLE200NX.
+For wireless, I use HardenedBSD 13-STABLE on a
+[PC Engines APU2](https://pcengines.ch/apu2.htm) using the WLE200NX.
 
 At each transitive point (WAP, Switch, Firewall, etc.), a SPAN port is
 enabled. So I can gain different kinds of visibility within the
@@ -123,6 +126,23 @@ thank the sarcasm gods for terminal escape codes. I mainly mention
 this to demonstrate how I approach data I don't fully trust--I
 naturally distrust even the data I generate.
 
+To further harden the server, I've set the following sysctl nodes in
+`/etc/sysctl.conf`
+
+```
+hardening.pax.aslr.status=3
+hardening.pax.mprotect.status=3
+hardening.pax.pageexec.status=3
+hardening.pax.segvguard.status=3
+```
+
+In `/etc/rc.conf`, I've set securelevel to 3:
+
+```
+kern_securelevel_enable="YES"
+kern_securelevel="3"
+```
+
 Every system in my infrastructure that can log to syslog have their
 syslog messages forwarded to this syslog server. As a rule: if the
 device can send syslog messages, it will.
@@ -157,6 +177,9 @@ my network to use my DNS server.
 On the firewall side, I disallow any device except for my DNS server
 from performing outbound DNS rquests. I have a transparent redirect
 rule to redirect outbound requests to my DNS server.
+
+I apply the same hardening techniques in my DNS server as I do the
+syslog server.
 
 ## NAS
 
@@ -197,8 +220,8 @@ systems.
 
 ## HardenedBSD Development Laptop
 
-My primarily laptop is the one I use for HardenedBSD development. It's
-a 2020 Dell Precision 7550. Of course, the laptop runs HardenedBSD on
+My primary laptop is the one I use for HardenedBSD development. It's a
+2020 Dell Precision 7550. Of course, the laptop runs HardenedBSD on
 bare metal. I use i3wm as my window manager, Firefox for my browser.
 Sakura is my terminal emulator, tmux my terminal multiplexer.
 
@@ -217,7 +240,7 @@ Precision 7540, is set up the exact same way.
 I have bunches and bunches of health issues. The health issue I talk
 about most is migraines since I get them so often. I occasionally
 spend a bit of time in bed or otherwise not at my office desk. My
-prinary laptop (the aforementioned HardenedBSD Development Laptop)
+primary laptop (the aforementioned HardenedBSD Development Laptop)
 doesn't do wireless, and even if it did, I'd still need it connected
 to the wired interface due to network usage constraints.
 
