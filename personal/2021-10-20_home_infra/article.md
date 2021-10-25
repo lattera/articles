@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 21 Oct 2021, 10:00 EDT
+Last modified: 25 Oct 2021, 10:30 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -281,6 +281,23 @@ production network.
   firewall/router
 * Two L3 managed switches
 * Two SoftIron OverDrive 1000 systems
+
+## TODO
+
+Here are some things I'd like to experiment with:
+
+1. Setting up Unbound on all HardenedBSD systems to support DoT to my
+   local DNS server.
+1. Set up TLS for all syslog-ng hosts. Start with DNS so that the
+   logged queries logged by devices with DoT-enabled devices remain
+   encrypted.
+1. Figure out if/how to ship Windows Event Logs to syslog.
+1. Add a second NIC to the NAS, and use lagg LACP to bond multiple
+   interfaces, doubling the effective bandwidth of the NAS.
+1. Attempt to set up kerberos/LDAP authentication, preferring to use
+   in-base applications only, but fallback to Samba4 if needed.
+1. Teach syslog-ng about the sappnd/uappnd file flags (see
+   `chflags(1)`).
 
 ## Appendix A - Unbound Config
 
