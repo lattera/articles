@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 25 Oct 2021, 10:30 EDT
+Last modified: 30 Oct 2021, 17:37 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -44,11 +44,13 @@ the number of active wireless devices to an absolute minimum.
 
 I'm eating my own dogfood by running the proprietary fork of OPNsense
 (called [HawkSense](https://blackhawknest.com/features/)) I'm working
-on at my ${DAYJOB} as my perimeter firewall. I use Hurricane
-Electric's [TunnelBroker](https://tunnelbroker.net/) service for IPv6.
-Even if Verizon FiOS residential service supported IPv6 (their
-business service does), I'd still want to use TunnelBroker so that I
-can maintain my own static /48.
+on at my ${DAYJOB} as my perimeter firewall. While OPNsense is moving
+back towards FreeBSD, HawkSense will remain on HardenedBSD.
+
+I use Hurricane Electric's [TunnelBroker](https://tunnelbroker.net/)
+service for IPv6. Even if Verizon FiOS residential service supported
+IPv6 (their business service does), I'd still want to use TunnelBroker
+so that I can maintain my own static /48.
 
 As far as hardware is concerned, the perimeter firewall is a
 [Protectli](https://protectli.com/) FW6C with 32GB RAM, a 128GB
