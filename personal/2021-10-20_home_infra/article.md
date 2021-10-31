@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 30 Oct 2021, 17:37 EDT
+Last modified: 31 Oct 2021, 08:26 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -170,6 +170,12 @@ All DNS requests are logged to syslog. I don't log the responses.
 
 I have cron set up to run every night at 01:02 to reload the void
 zones rules.
+
+In `/etc/crontab`, I have:
+
+```
+2	1	*	*	*	root /usr/local/bin/void-zones-update.sh
+```
 
 Unbound is acting is a caching and validating recursive name server. I
 enforce DNSSEC. I also use the DoT/DoH canary domain to instruct
