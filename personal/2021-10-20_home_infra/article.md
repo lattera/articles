@@ -255,6 +255,14 @@ For email, I use jailed neomutt. I have one jail for each of my email
 accounts: one for HardenedBSD, one for personal email, another for
 work email. Each neomutt jail is NATed and uses vnet.
 
+To consume the iSCSI volume on my NAS, these are the commands I run:
+
+```
+# iscsictl -A -p hbsd-dev-local.ip6.home.lan -t iqn.2021-04.dev.hardenedbsd:laptop-01-vol-01
+# geli attach da0
+# zpool import iscsi-01
+```
+
 This laptop is treated more of a desktop. My work laptop, a Dell
 Precision 7540, is set up the exact same way.
 
