@@ -313,9 +313,11 @@ production network.
 * HardenedBSD APU2 acting as a DNS server
 * HardenedBSD APU2 acting as a syslog-ng syslog server
 * HardenedBSD APU2 acting as my fully Tor-ified network
-* Debian VM for Splunk
-  firewall/router
-* Two L3 managed switches
+* HardenedBSD server acting as a VM host:
+  1. Debian VM for Splunk
+  1. HawkSense VM to test HawkSense development
+* Two L3 managed 1Gbps switches
+* Three unmanaged 1Gbps switches
 * Two SoftIron OverDrive 1000 systems
 
 ## TODO
