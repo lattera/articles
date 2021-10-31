@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 31 Oct 2021, 08:26 EDT
+Last modified: 31 Oct 2021, 09:26 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -76,7 +76,10 @@ representation of the setup:
 | Internet | <=> HawkSense <=> Cisco SG350 <=> [ Laptops, NAS, etc ]
 +----------+               |  \
                            |   \
-			   |    -=> TP-LINK <=> WAP
+			   |    -=> TP-LINK Switch <=> WAP
+			   |                         \
+			   |                          \
+			   |                           -=> [ Smart TV, Amazon Fire Stick, etc. ]
 			   |
 			   +===> Tor-ified Network <=> [ burner phones, R&D laptop, etc. ]
 ```
@@ -257,6 +260,11 @@ in a more limited capacity. That's where this laptop comes into play.
 This laptop (a Thinkpad T410) runs HardenedBSD 13-STABLE. I've set it
 up with lagg so that I can transition seamlessly from wired to
 wireless without having to worry about terminating any connections.
+
+Most of the systems I play with on a daily basis run HardenedBSD
+14-CURRENT. So it's good to have at least one 13-STABLE system around,
+especially a laptop, so that I can make sure the changes I backport
+(aka, Merge From Current (MFC)) to 13-STABLE work properly.
 
 ## Tor-ified Network
 
@@ -656,4 +664,41 @@ wlans_ath0="wlan0"
 ifconfig_wlan0="WPA"
 ifconfig_lagg0="up laggproto failover laggport em0 laggport wlan0 DHCP"
 ifconfig_lagg0_ipv6="inet6 accept_rtadv"
+```
+
+## Appendix E - NAS iSCSI Config
+
+```
+portal-group pg0 {
+    discovery-auth-group no-authentication
+    listen 0.0.0.0
+    listen ::
+}
+
+target iqn.2021-04.dev.hardenedbsd:laptop-01-vol-01 {
+	auth-group no-authentication
+	portal-group pg0
+
+	lun 0 {
+		path /dev/zvol/tank/iscsi/laptop-01/vol-01
+	}
+}
+
+target iqn.2021-04.dev.hawksense:laptop-01-vol-01 {
+	auth-group no-authentication
+	portal-group pg0
+
+	lun 0 {
+		path /dev/zvol/tank/iscsi/hawksense-laptop-01/vol-01
+	}
+}
+
+target iqn.2021-05-06.dev.hardenedbsd:win10-01-vol-01 {
+	auth-group no-authentication
+	portal-group pg0
+
+	lun 0 {
+		path /dev/zvol/tank/iscsi/win10-01/vol-01
+	}
+}
 ```
