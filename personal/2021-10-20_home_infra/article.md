@@ -315,7 +315,8 @@ production network.
 * HardenedBSD APU2 acting as my fully Tor-ified network
 * HardenedBSD server acting as a VM host:
   1. Debian VM for Splunk
-  1. HawkSense VM to test HawkSense development
+  1. HawkSense VM to test HawkSense development (hooked into the
+     firewall SPAN port)
 * Two L3 managed 1Gbps switches
 * Three unmanaged 1Gbps switches
 * Two SoftIron OverDrive 1000 systems
