@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 31 Oct 2021, 09:26 EDT
+Last modified: 31 Oct 2021, 09:45 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -88,10 +88,22 @@ representation of the setup:
 
 As mentioned before, HawkSense is my firewall. It's a proprietary fork
 of OPNsense I've been working on at ${DAYJOB} for now a little over a
-year.
+year. As I mentioned, HawkSense will remain on HardenedBSD while in
+January of 2022, OPNsense will switch back to FreeBSD. HawkSense is
+currently based on HardenedBSD 13-STABLE.
+
+I'm working with the executive team at ${DAYJOB} to hopefully provide
+a free or reduced-cost version of HawkSense for open source/hobbyist/
+homelab communities.
+
+In addition to being based on a security-focused OS, there's a lot of
+extra goodies in HawkSense that you won't find anywhere else in the
+whole infosec industry.
 
 I have a very strict set of egress rules, using allowlists to filter
-traffic.
+traffic. Most notably, I block all outbound DNS unless it comes from
+my DNS server. I tried blocking plaintext HTTP for a while until I
+learned WSUS uses HTTP rather than HTTPS.
 
 Suricata is enabled in IPS mode, using a good number of the ET Open
 rulesets.
