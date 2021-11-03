@@ -1,6 +1,6 @@
 # October 2021 Home Infrastructure Status
 
-Last modified: 31 Oct 2021, 09:45 EDT
+Last modified: 03 Nov 2021, 13:50 EDT
 
 Please note that this is a living document. I plan to evolve this
 article in step with the infrastructure. If you're interested in
@@ -138,10 +138,12 @@ I assume each and every message could itself be malicious. I treat
 inspecting the log files with care. If any system was compromised, an
 attacker could theoretically pivot to other systems via carefully
 crafted malicious syslog messages. Would anyone do this? I doubt it.
-But it's still within my own threat model. At this moment, I'd like to
-thank the sarcasm gods for terminal escape codes. I mainly mention
-this to demonstrate how I approach data I don't fully trust--I
-naturally distrust even the data I generate.
+Although, there is [one story](https://asylum.madhouse-project.org/blog/2021/10/23/peeking-through-logs/)
+about this exact situation happening.  But it's still within my own
+threat model. At this moment, I'd like to thank the sarcasm gods for
+terminal escape codes. I mainly mention this to demonstrate how I
+approach data I don't fully trust--I naturally distrust even the data
+I generate.
 
 To further harden the server, I've set the following sysctl nodes in
 `/etc/sysctl.conf`
