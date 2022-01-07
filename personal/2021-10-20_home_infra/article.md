@@ -348,10 +348,12 @@ server:
 	verbosity: 1
 	interface: 0.0.0.0
 	interface: ::0
-	#logfile: "unbound.log"
 	use-syslog: yes
 	log-identity: "dns-01.ip6.home.lan_unbound"
 	log-queries: yes
+	log-replies: yes
+	log-tag-queryreply: yes
+	log-servfail: yes
 	access-control: 192.168.99.0/24 allow
 	access-control: 2001:470:e1e1::/48 allow
 
@@ -394,7 +396,6 @@ include: /var/unbound/local-void.zones
 # Disable DoH/DoT
 local-zone: "use-application-dns.net." static
 
-# Note: I'm intentionally leaving out the home.lan file.
 include: /usr/local/etc/unbound/zones/home.lan
 ```
 
