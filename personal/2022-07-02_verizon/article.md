@@ -1,3 +1,7 @@
+# Adventures With Verizon FiOS Residential IPv6
+
+Warning I'm a bit long-winded in some places.
+
 Sometime recently (I'm not sure when), Verizon enabled IPv6 support for
 residential FiOS customers. Verizon will give you a /56 prefix via DHCPv6.
 
