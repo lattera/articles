@@ -44,8 +44,8 @@ a blog article detailing my goals for the next year, with one goal being to
 implement ASLR.
 
 Unbeknownst to me, another hacker in Hungary, Oliver Pinter, had already started
-work on a clean-room reimplementation of PaX's ASLR implementation for Linux. He
-reached out to me and we started collaborating.
+work on a clean-room reimplementation of PaX's ASLR implementation. He reached
+out to me and we started collaborating.
 
 Thus HardenedBSD was born.
 
