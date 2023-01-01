@@ -141,9 +141,9 @@ spiraled downward from 2018 to 2020, very quite literally only barely surviving.
 
 Due to his own shift in priorities, Oliver amicably resigned from the project.
 He wanted to focus his attention elsewhere and I was (and still am) totally
-supportive of that decision. I will admit, though, that it took aother hit to my
-mental health decline. I felt like I was carrying the torch alone. I recognize
-now, however, that I was far from alone.
+supportive of that decision. Though I will admit it was another hit to my
+already declining mental health. I felt like I was carrying the torch alone. I
+recognize now, however, that I was far from alone.
 
 I'm still healing from the trauma, the heartache, and the pain from those two
 years. I'm doing so much better, especially as I utilize positive coping
