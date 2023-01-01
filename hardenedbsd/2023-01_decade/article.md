@@ -190,3 +190,23 @@ survive and thrive. The infrastructure will come alive again in due time.
 
 I look forward to the next decade of HardenedBSD. I would love to see CHERI,
 Capsicum, and (forward edge and backward edge) CFI tightly integrated together.
+
+### Friends Made Along The Way
+
+A lot of folks have touched my life throughout the past decade. I had a blast
+working with the OPNsense project, helping them adopt HardenedBSD. Early on,
+SoldierX provided some hardware and did a lot of advocacy for the project.
+
+Emerald Onion is doing some really cool things with Tor. They continuously
+inspire me.
+
+Everyone on The HardenedBSD Foundation Board of Directors leads and guides me to
+new paths, ones which I never knew existed.
+
+I have tremendous respect for some in the FreeBSD project and community. Namely,
+Kyle Evans, Ed Maste, John-Mark Gurney, Eric McCorkle, Michael Shirk, and the
+rest of the CharmBUG crew. I'm sure there's quite a number of others.
+
+Eva Winterschon has selflessly contributed an amazing amount of infrastructure
+to the project, helping us scale to the level we did. My recent advancements in
+Cross-DSO CFI integration were done on hardware she donated to the project.
