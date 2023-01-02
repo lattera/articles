@@ -131,7 +131,7 @@ My whole life, I've lived with treatment-resistant depression and bipolar.
 Shortly after the internship ended, my employer was acquired by "the nation's
 largest military shipbuilding company."
 
-It seemed that nearly overnight, the we shifted from a company specializing in
+It seemed that nearly overnight, that we shifted from a company specializing in
 what I like to call "peacesful offensive" solutions to having to work for a
 large corporation that profits from murder.
 
