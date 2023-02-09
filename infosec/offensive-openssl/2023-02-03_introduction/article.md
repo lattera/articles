@@ -110,6 +110,9 @@ If you like bloodshot eyes, here you go! In this output, we see two things.
 Namely, that we were able to generate a client-side certificate with a notAfter
 date that preceeds the notBefore date. And we see that nginx gladly accepted it.
 
+The test zsh script I wrote can be found
+[here](https://git.hardenedbsd.org/shawn.webb/articles/-/blob/master/infosec/offensive-openssl/2023-02-03_introduction/test_tls.zsh).
+
 ```
 $ uname -a
 FreeBSD offensive-openssl 13.2-PRERELEASE-HBSD FreeBSD 13.2-PRERELEASE-HBSD #0  hardened/13-stable/master-n191656-36e160ea752: Tue Feb  7 09:57:03 EST 2023     shawn@hbsd13-playground-01:/usr/obj/usr/src/amd64.amd64/sys/HARDENEDBSD amd64
